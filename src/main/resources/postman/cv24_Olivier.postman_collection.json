@@ -1,0 +1,630 @@
+{
+	"info": {
+		"_postman_id": "6a4a21a7-d0df-40b5-8557-9badb6775fbb",
+		"name": "cv24_Olivier",
+		"description": "Collection permettant de tester le service RESTful pour la gestion des CV24EndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33755293"
+	},
+	"item": [
+		{
+			"name": "Affichage de la page d'acceuil",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Affichage de la page d'aide",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/help",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"help"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insertion du CV Minimal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extraire l'ID de la réponse XML\r",
+							"var idStartIndex = pm.response.text().indexOf(\"<id>\") + \"<id>\".length;\r",
+							"var idEndIndex = pm.response.text().indexOf(\"</id>\");\r",
+							"var id = pm.response.text().substring(idStartIndex, idEndIndex);\r",
+							"\r",
+							"// Stocker la valeur de l'ID dans une variable Postman\r",
+							"pm.collectionVariables.set(\"id\", id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const xml2js = require('xml2js');"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<cv24:cv24 xmlns:cv24=\"http://univ.fr/cv24\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://univ.fr/cv24 cv24.xsd \">\r\n    <cv24:identite>\r\n        <genre>Mr</genre>\r\n        <nom>OLIVIERMM</nom>\r\n        <prenom>THOMAS</prenom>\r\n        <tel>06 12 13 14 12</tel>\r\n    </cv24:identite>\r\n    <cv24:objectif status=\"stage\">\r\n        <objectif>AAAadjajoiqjfia1141412389.,':;@~$#()&amp;?!$*-_=</objectif>\r\n    </cv24:objectif>\r\n    <cv24:competences>\r\n        <diplôme niveau=\"5\">\r\n            <date>2024-04-11</date>\r\n            <titre>bac</titre>\r\n        </diplôme>\r\n    </cv24:competences>\r\n</cv24:cv24>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/insert",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Affichage du CV Minimal XML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/cv24/xml?id={{id}}",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"cv24",
+						"xml"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Affichage CV minimal HTML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/cv24/xml?id={{id}}",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"cv24",
+						"xml"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Suppresion du CV Minimal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/delete?id={{id}}",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insertion d'un CV complet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const xml2js = require('xml2js');"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extraire l'ID de la réponse XML\r",
+							"var idStartIndex = pm.response.text().indexOf(\"<id>\") + \"<id>\".length;\r",
+							"var idEndIndex = pm.response.text().indexOf(\"</id>\");\r",
+							"var id = pm.response.text().substring(idStartIndex, idEndIndex);\r",
+							"\r",
+							"// Stocker la valeur de l'ID dans une variable Postman\r",
+							"pm.collectionVariables.set(\"id\", id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<cv24:cv24 xmlns:cv24=\"http://univ.fr/cv24\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://univ.fr/cv24 cv24.xsd \">\r\n    <cv24:identite>\r\n        <genre>Mr</genre>\r\n        <nom>OLIVI</nom>\r\n        <prenom>THOMAS</prenom>\r\n        <tel>+33 1 23 45 67 89</tel>\r\n        <mail>thomas@gmail.com</mail>\r\n    </cv24:identite>\r\n    <cv24:objectif status=\"stage\">\r\n        <objectif>AAAadjajoiqjfia1141412389.,':;@~$#()&amp;?!$*-_=</objectif>\r\n    </cv24:objectif>\r\n    <cv24:prof>\r\n        <detail>\r\n            <datedeb>2021-12-04</datedeb>\r\n            <datefin>2022-03-10</datefin>\r\n            <titre>promeneur de chien</titre>\r\n        </detail>\r\n        <detail>\r\n            <datedeb>2021-12-04</datedeb>\r\n            <datefin>2012-03-08</datefin>\r\n            <titre>promeneur de chien</titre>\r\n        </detail>\r\n        <detail>\r\n            <datedeb>2021-12-04</datedeb>\r\n            <datefin>2022-03-10</datefin>\r\n            <titre>promeneur de chat</titre>\r\n        </detail>\r\n    </cv24:prof>\r\n    <cv24:competences>\r\n        <diplôme niveau=\"5\">\r\n            <date>2024-04-11</date>\r\n            <institut>fhuadfh\tfaoiuzepeggzgezgeezgzhçf</institut>\r\n            <titre>bac</titre>\r\n            <titre>licence</titre>\r\n            <titre>master</titre>\r\n            <titre>doctorat</titre>\r\n            <titre>jedi</titre>\r\n        </diplôme>\r\n        <certif>\r\n            <datedeb>2024-04-11</datedeb>\r\n            <titre>fhuadfh\tfaoiuzepeggzgezgeezgzhçf</titre>\r\n        </certif>\r\n        <certif>\r\n            <datedeb>2024-04-11</datedeb>\r\n            <datefin>2024-04-11</datefin>\r\n            <titre>afu</titre>\r\n        </certif>\r\n    </cv24:competences>\r\n    <cv24:divers>\r\n        <lv lang=\"fr\" cert=\"CLES\" nivs=\"B1\"/>\r\n        <lv lang=\"en\" cert=\"MAT\" />\r\n        <lv lang=\"es\" cert=\"TOEIC\" nivi=\"100\"/>\r\n        <lv lang=\"fn\" cert=\"CLES\" nivs=\"A2\"/>\r\n        <lv lang=\"po\" cert=\"MAT\"/>\r\n        <autre titre=\"sportif de haut niveau\" comment=\"natation\"></autre>\r\n        <autre titre=\"sportif de haut niveau\" comment=\"foot\"></autre>\r\n        <autre titre=\"sportif de haut niveau\" comment=\"tennis\"></autre>\r\n    </cv24:divers>\r\n</cv24:cv24>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/insert",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insertion d'un nouveau CV Minimal",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const xml2js = require('xml2js');"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extraire l'ID de la réponse XML\r",
+							"var idStartIndex = pm.response.text().indexOf(\"<id>\") + \"<id>\".length;\r",
+							"var idEndIndex = pm.response.text().indexOf(\"</id>\");\r",
+							"var id = pm.response.text().substring(idStartIndex, idEndIndex);\r",
+							"\r",
+							"// Stocker la valeur de l'ID dans une variable Postman\r",
+							"pm.collectionVariables.set(\"ident\", id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<cv24:cv24 xmlns:cv24=\"http://univ.fr/cv24\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://univ.fr/cv24 cv24.xsd \">\r\n    <cv24:identite>\r\n        <genre>Mr</genre>\r\n        <nom>OLIVIERLL</nom>\r\n        <prenom>THOMAS</prenom>\r\n        <tel>06 12 13 14 12</tel>\r\n    </cv24:identite>\r\n    <cv24:objectif status=\"stage\">\r\n        <objectif>AAAadjajoiqjfia1141412389.,':;@~$#()&amp;?!$*-_=</objectif>\r\n    </cv24:objectif>\r\n    <cv24:competences>\r\n        <diplôme niveau=\"5\">\r\n            <date>2024-04-11</date>\r\n            <titre>bac</titre>\r\n        </diplôme>\r\n    </cv24:competences>\r\n</cv24:cv24>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/insert",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Suppression d'un cv complet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/delete?id={{id}}",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Affichage de tous les cv XML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/cv24/resume/xml",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"cv24",
+						"resume",
+						"xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Affichage de tous les CV HTML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/cv24/resume",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"cv24",
+						"resume"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CV Dupliquer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<cv24:cv24 xmlns:cv24=\"http://univ.fr/cv24\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://univ.fr/cv24 cv24.xsd \">\r\n    <cv24:identite>\r\n        <genre>Mr</genre>\r\n        <nom>OLIVIERLL</nom>\r\n        <prenom>THOMAS</prenom>\r\n        <tel>06 12 13 14 12</tel>\r\n    </cv24:identite>\r\n    <cv24:objectif status=\"stage\">\r\n        <objectif>AAAadjajoiqjfia1141412389.,':;@~$#()&amp;?!$*-_=</objectif>\r\n    </cv24:objectif>\r\n    <cv24:competences>\r\n        <diplôme niveau=\"5\">\r\n            <date>2024-04-11</date>\r\n            <titre>bac</titre>\r\n        </diplôme>\r\n    </cv24:competences>\r\n</cv24:cv24>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/insert",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CV XML Invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<cv24:cv24 xmlns:cv24=\"http://univ.fr/cv24\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://univ.fr/cv24 cv24.xsd \">\r\n    <cv24:identite>\r\n        <genre>Mr</genre>\r\n        <nom>OLIVIER</nom>\r\n        <prenom>THOMAS</prenom>\r\n        <tel>06 12 13 14 12</tel>\r\n    </cv24:identite>\r\n    <cv24:competences>\r\n        <diplôme niveau=\"5\">\r\n            <date>2024-04-11</date>\r\n            <titre>bac</titre>\r\n        </diplôme>\r\n    </cv24:competences>\r\n</cv24:cv24>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/insert",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Suppression du dernier CV",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/delete?id={{ident}}",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{ident}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"const xml2js = require('xml2js');"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "34",
+			"type": "string"
+		},
+		{
+			"key": "ident",
+			"value": "00",
+			"type": "string"
+		}
+	]
+}

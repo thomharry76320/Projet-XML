@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cv24:cv24 xmlns:cv24="http://univ.fr/cv24" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://univ.fr/cv24 cv24.xsd ">
+    <cv24:identite>
+        <genre>Mr</genre>
+        <nom>OLIVIER</nom>
+        <prenom>THOMAS</prenom>
+        <tel>06 12 13 14 12</tel>
+    </cv24:identite>
+    <cv24:objectif status="stage">
+        <objectif>AAAadjajoiqjfia1141412389.,':;@~$#()&amp;?!$*-_=</objectif>
+    </cv24:objectif>
+    <cv24:competences>
+        <diplôme niveau="5">
+            <date>2024-04-11</date>
+            <titre>bac</titre>
+        </diplôme>
+    </cv24:competences>
+</cv24:cv24>

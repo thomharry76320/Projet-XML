@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CV Complet</title>
+    <link rel="stylesheet" type="text/css" href="cv.css" />
+</head>
+<body>
+    
+    <div class="container">
+        <h2><span th:text="${cv.getIdentite().getGenre()}"></span> <span th:text="${cv.getIdentite().getNom()}"></span> <span th:text="${cv.getIdentite().getPrenom()}"></span></h2>
+        <p>
+            Télépohne : <span th:text="${cv.getIdentite().getTel()}"></span><br>
+            <span th:if="${cv.getIdentite().getMel() != null}">Email: <span th:text="${cv.getIdentite().getMel()}"></span></span>
+        </p>
+        
+        <!-- Objectif -->
+        <h2>Objectif</h2>
+        <span th:if="${cv.getObjectif().getStatus() == 'emploi'}">
+            Demande d' <span th:text="${cv.getObjectif().getStatus()}"></span>
+        </span>
+        <span th:unless="${cv.getObjectif().getStatus() == 'emploi'}">
+            Demande de <span th:text="${cv.getObjectif().getStatus()}"></span>
+        </span>
+        <p>Description : <span th:text="${cv.getObjectif().getObjectif()}"></span></p>
+
+
+        <!-- Prof -->
+        <div th:if="${cv.getProf().getDetail().size() != 0}">
+            <h2>Expériences professionnelles</h2>
+            <ol>
+                <li th:each="prof : ${cv.getProf().getDetail()}">
+                    <span th:text="${prof.getTitre()}"></span> (du
+                    <span th:text="${prof.getDatedeb()}"></span>
+                    <span th:if="${prof.getDatefin() != null}">
+                        au <span th:text="${prof.getDatefin()}"></span>)
+                    </span>
+                    <span th:unless="${prof.getDatefin() != null}">
+                        à aujourd'hui)
+                    </span>
+                </li>
+            </ol>
+        </div>
+    
+        <!-- Diplômes -->
+        <h2>Diplômes</h2>
+        <table>
+            <tr th:each="diplome : ${cv.getCompetences().getDiplome()}">
+                <td><span th:text="${diplome.getDate()}"></span></td>
+                <td><span th:each="titre :${diplome.getTitre()}"> <span th:text="${titre.getTitre()}"></span> </span></td>
+                <td>(niveau : <span th:text="${diplome.getNiveau()}"></span>)</td>
+                <td><span th:text="${diplome.getInstitut()}"></span></td>
+            </tr>
+        </table>
+    
+        <!-- Certifications -->
+        <div th:if="${cv.getCompetences().getCertif().size() != 0}">
+            <h2>Certifications</h2>
+            <table>
+                <tr th:each="certif : ${cv.getCompetences().getCertif()}">
+                    <td>
+                        <span th:text="${certif.getDatedeb()}"></span>
+                        <span th:if="${certif.getDatefin() != null}">
+                            au <span th:text="${certif.getDatefin()}"></span>
+                        </span>
+                        <span th:unless="${certif.getDatefin() != null}">
+                            à aujourd'hui
+                        </span>
+                    </td>
+                    <td><span th:text="${certif.getTitre()}"></span></td>
+                </tr>
+            </table>
+        </div>
+    
+        <!-- Langues -->
+        <div th:if="${cv.getDivers().getLv().size() != 0}">
+            <h2>Langues</h2>
+            <ul th:each="langue : ${cv.getDivers().getLv()}">
+                <li>
+                    <span th:text="${langue.getLang()}"></span> :
+                    <span th:text="${langue.getCert()}"></span>
+                    <span th:if="${langue.getCert() == 'CLES'}">
+                        (<span th:text="${langue.getNivs()}"></span>)
+                    </span>
+                    <span th:if="${langue.getCert() == 'TOEIC'}">
+                        (<span th:text="${langue.getNivi()}"></span>)
+                    </span>
+                </li>
+            </ul>
+        </div>
+    
+        <!-- Divers -->
+        <div th:if="${cv.getDivers().getAutre().size() != 0}">
+            <h2>Divers</h2>
+            <ul th:each="autre : ${cv.getDivers().getAutre()}">
+                <li>
+                    <span th:text="${autre.getTitre()}"></span>
+                    <span th:if="${autre.getComment() != null}">
+                        : <span th:text="${autre.getComment()}"></span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

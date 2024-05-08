@@ -1,0 +1,3 @@
+docker exec -it postgres-container bash
+psql -U postgres
+CREATE DATABASE cv;

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="resume.css">
+    <title>Résumé CV</title>
+</head>
+<body>
+<h1>Liste des CV</h1>
+<div class="cv-container">
+    <div class="cv-card" th:each="cv : ${cvs}">
+        <div class="cv-header">
+            <h2>CV numéro : <span th:text="${cv.getId()}"></span></h2>
+        </div>
+        <div class="cv-item">
+            <label>Genre:</label> <span th:text="${cv.getIdentite().getGenre()}"></span>
+        </div>
+        <div class="cv-item">
+            <label>Nom:</label> <span th:text="${cv.getIdentite().getNom()}"></span>
+        </div>
+        <div class="cv-item">
+            <label>Prénom:</label> <span th:text="${cv.getIdentite().getPrenom()}"></span>
+        </div>
+        <div class="section-title">Objectif</div>
+        <hr>
+        <div class="cv-item">
+            <label>Statut:</label> <span th:text="${cv.getObjectif().getStatus()}"></span>
+        </div>
+        <div class="cv-item">
+            <label>Description:</label> <span th:text="${cv.getObjectif().getObjectif()}"></span>
+        </div>
+        <div class="section-title">Diplôme</div>
+        <hr>
+        <div class="cv-item">
+            <label>Niveau:</label> <span th:text="${cv.getCompetences().getDiplome().get(0).getNiveau()}"></span>
+        </div>
+        <div class="cv-item">
+            <label>Date d'obtention:</label> <span th:text="${cv.getCompetences().getDiplome().get(0).getDate()}"></span>
+        </div>
+        <div class="cv-item">
+            <label>Institut:</label> <span th:text="${cv.getCompetences().getDiplome().get(0).getInstitut()}"></span>
+        </div>
+        <div class="cv-item" th:each="titre : ${cv.getCompetences().getDiplome().get(0).getTitre()}">
+            <label>Titre:</label> <span th:text="${titre.getTitre()}"></span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

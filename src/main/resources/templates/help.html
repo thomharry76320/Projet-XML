@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="help.css">
+    <title>Help</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">Help</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>URL</th>
+            <th>Méthode</th>
+            <th>Résumer de l'opération</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>/</td>
+            <td>GET</td>
+            <td>Affiche la page d'acceuil de notre application<br>Format de retour : HTML</td>
+        </tr>
+        <tr>
+            <td>/help</td>
+            <td>GET</td>
+            <td>Affiche la page contenant les informations d’aide qui contient la liste des opérations de l'application<br>Format de retour : HTML</td>
+        </tr>
+        <tr>
+            <td>/cv24/resume/xml</td>
+            <td>GET</td>
+            <td>Affiche la liste des CV stockés de manières résumé<br>Format de retour : XML</td>
+        </tr>
+        <tr>
+            <td>/cv24/resume</td>
+            <td>GET</td>
+            <td>Affiche la liste des CV stockés de manières résumé<br>Format de retour : HTML</td>
+        </tr>
+        <tr>
+            <td>/cv24/xml?id=&lt;id&gt;</td>
+            <td>GET</td>
+            <td>Affiche le contenu complet du CV dont l’identifiant est transmis en paramètre ou une erreur en cas d'échec de l'opération.<br>Format attendue : L'id est un nombre<br>Format de retour : XML</td>
+        </tr>
+        <tr>
+            <td>/cv24/html?id=&lt;id&gt;</td>
+            <td>GET</td>
+            <td>Affiche le contenu complet du CV dont l’identifiant est transmis en paramètre ou une erreur en cas d'échec de l'opération.<br>Format attendue : L'id est un nombre<br>Format de retour : HTML</td>
+        </tr>
+        <tr>
+            <td>cv24/insert</td>
+            <td>POST</td>
+            <td>Ajoute un CV dans la base de données s'il est valide, sinon renvoie une erreur.<br>Format attendue : Flux XML respectant la spécification cv24 à ajouter, conforme au schéma xsd.<br>Format de retour : XML avec l'id du CV ajouté et un message indiquant qu'il est insérer si 'lopération réussis ou sinon un message d'erreur</td>
+        </tr>
+        <tr>
+            <td>/cv24/delete?id=&lt;id&gt;</td>
+            <td>DELETE</td>
+            <td>Supprime un CV dont l’identifiant est transmis en paramètre ou une erreur en cas d'échec de l'opération.<br>Format attendue : L'id est un nombre<br>Format de retour : XML avec l'id du CV supprimé et un message indiquant qu'il a été supprimé si 'lopération réussis ou sinon un message d'erreur</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

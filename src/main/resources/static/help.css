@@ -1,0 +1,63 @@
+body {
+    font-family: 'Okaso';
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(241, 240, 224);
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title {
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 40px;
+    width: 100%;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #d1d1d1;
+    text-align: center;
+}
+
+td:first-child,
+th:first-child,
+td:nth-child(2),
+th:nth-child(2) {
+    text-align: center; /* Centrer le texte dans les deux premières colonnes */
+    border-right: 1px solid black; /* Ajoute une bordure verticale à droite des deux premières colonnes */
+}
+
+td:last-child,
+th:last-child {
+    border-right: none; /* Retire la bordure verticale à droite de la dernière colonne */
+}
+
+tr:not(:first-child) td {
+    border-top: 1px solid black; /* Ajoute une bordure noire en haut de chaque cellule, sauf pour la première ligne */
+}
+
+tr:not(:last-child) td {
+    border-bottom: none; /* Retire la bordure noire en bas de chaque cellule, sauf pour la dernière ligne */
+}
+
+tr:nth-child(even) {
+    background-color: #d1d1d1;
+}
+
+td {
+    background-color: white;
+}
+
