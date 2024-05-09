@@ -13,10 +13,21 @@ import javax.xml.validation.Validator;
 import java.io.IOException;
 import java.io.StringReader;
 
+/**
+ * Cette classe fournit des méthodes pour valider un contenu XML par rapport à un schéma XSD.
+ */
 @Component
 public class XMLValidator {
 
-    // Vérifie si un fichier XML est valide par rapport au fichier XSD passé en paramétre
+    /**
+     * Valide le contenu XML par rapport au fichier XSD spécifié.
+     *
+     * @param xmlContent   Le contenu XML à valider.
+     * @param xsdFilePath  Le chemin vers le fichier XSD à utiliser pour la validation.
+     * @return true si le contenu XML est valide par rapport au schéma XSD, sinon false.
+     * @throws IOException  Si une erreur d'entrée/sortie se produit lors de la lecture du fichier XSD.
+     * @throws SAXException Si une erreur se produit lors de la validation XML.
+     */
     public static boolean validateXMLAgainstXSD(String xmlContent, String xsdFilePath) throws IOException, SAXException {
             ClassPathResource resourceXSD = new ClassPathResource(xsdFilePath);
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);

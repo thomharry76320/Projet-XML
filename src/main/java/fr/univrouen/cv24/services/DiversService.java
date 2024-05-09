@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service pour la gestion des éléments DIVERS.
+ */
 @Service
 public class DiversService {
 
@@ -19,6 +22,13 @@ public class DiversService {
     @Autowired
     private AutreRepository autreRepository;
 
+    /**
+     * Enregistre les informations diverses d'un CV.
+     *
+     * @param div Les données diverses à enregistrer.
+     * @param id L'identifiant du CV auquel les données diverses sont associées.
+     * @return Les données diverses enregistrées.
+     */
     public Divers saveDivers(Divers div, int id) {
         List<Langue> langues = div.getLv();
         if (langues != null) {
@@ -32,12 +42,17 @@ public class DiversService {
             for (Autre a : autres) {
                 a.setcvID(id);
                 autreRepository.save(a);
-
             }
         }
         return div;
     }
 
+    /**
+     * Récupère les informations diverses d'un CV en fonction de son identifiant.
+     *
+     * @param id L'identifiant du CV.
+     * @return Les données diverses du CV correspondant à l'identifiant spécifié.
+     */
     public Divers getDiversByID(int id) {
         Divers d = new Divers();
         d.setLv(langueRepository.findAllByCvId(id));

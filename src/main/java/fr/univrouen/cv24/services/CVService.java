@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service pour la gestion des CV.
+ */
 @Service
 public class CVService {
 
@@ -35,7 +38,13 @@ public class CVService {
     @Autowired
     private DiversService diversService;
 
-    // Sauvegarde un CV dans le base de donnée si il n'existe pas déja sinon renvoie une erreur.
+    /**
+     * Sauvegarde un CV dans la base de données s'il n'existe pas déjà, sinon renvoie une erreur.
+     *
+     * @param cv Le CV à sauvegarder.
+     * @return Le CV sauvegardé.
+     * @throws ConstraintViolationException Si le CV existe déjà dans la base de données.
+     */
     public CV24 saveCV(CV24 cv) {
         List<Identite> i = identiteService.searchUserAlreadyExist(cv.getIdentite().getGenre(), cv.getIdentite().getNom(),
                 cv.getIdentite().getPrenom(),cv.getIdentite().getTel());
@@ -60,7 +69,14 @@ public class CVService {
         }
     }
 
-    // Supprime le CV qui correspond à l'id en paramètre et si cette id ne correspond à aucun CV alors renvoie une erreur.
+    /**
+     * Supprime le CV correspondant à l'ID spécifié.
+     *
+     * @param id L'ID du CV à supprimer.
+     * @return true si le CV est supprimé avec succès, sinon false.
+     * @throws IllegalArgumentException Si aucun CV correspondant à l'ID spécifié n'est trouvé.
+     * @throws PersistenceException      Si le CV existe toujours après la suppression.
+     */
     public boolean deleteCV(int id) {
         if (!cvRepository.existsById((long) id)) {
             throw new IllegalArgumentException(String.valueOf(id));
@@ -72,7 +88,11 @@ public class CVService {
         return true;
     }
 
-    // Renvoie la liste de tout les CV de manières résumer
+    /**
+     * Renvoie une liste de tous les CV sous forme résumée.
+     *
+     * @return La liste des CV résumés.
+     */
     public List<CV24> getResumeCV() {
         List<CV24> l = cvRepository.findAll();
         for (CV24 cv : l) {
@@ -84,7 +104,13 @@ public class CVService {
         return l;
     }
 
-    // Renvoie le CV complet correspondant à l'id sinon renvoie une erreur.
+    /**
+     * Renvoie le CV complet correspondant à l'ID spécifié.
+     *
+     * @param id L'ID du CV à récupérer.
+     * @return Le CV complet correspondant à l'ID spécifié.
+     * @throws IllegalArgumentException Si aucun CV correspondant à l'ID spécifié n'est trouvé.
+     */
     public CV24 getCVById(int id) {
         if (!cvRepository.existsById((long) id)) {
             throw new IllegalArgumentException(String.valueOf(id));

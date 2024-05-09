@@ -13,9 +13,21 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 
+/**
+ * Classe qui gère les exceptions globales pour l'application.
+ * Elle permet d'intercepter et gérer différents types d'exceptions,
+ * et retourner une réponse appropriée au client.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * Méthode qui gère toutes les exceptions non traitées spécifiquement par d'autres méthodes
+     * et retourne une réponse HTTP avec un message d'erreur XML approprié.
+     *
+     * @param e L'exception à gérer.
+     * @return Une ResponseEntity contenant le message d'erreur XML et le code HTTP approprié.
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
         XMLMessageBuilder messageBuilder = new XMLMessageBuilder();
@@ -31,21 +43,21 @@ public class GlobalExceptionHandler {
             status = HttpStatus.BAD_REQUEST;
             message = messageBuilder.buildErrorMessage("ERROR", "Fichier Introuvable");
         } else if (e instanceof JAXBException) {
-            // Gestion des erreurs de convertion xml
+            // Gestion des erreurs de conversion XML
             status = HttpStatus.BAD_REQUEST;
             message = messageBuilder.buildErrorMessage("ERROR", "CONVERSION FAILED");
         } else if (e instanceof ConstraintViolationException) {
-            // Gestion des erreurs de duplication de cv
+            // Gestion des erreurs de duplication de CV
             status = HttpStatus.BAD_REQUEST;
             message = messageBuilder.buildErrorMessage("ERROR", "DUPLICATED");
         } else if (e instanceof IllegalArgumentException) {
-            // Gestion des erreurs de suppression
+            // Gestion des erreurs d'argument invalide
             status = HttpStatus.BAD_REQUEST;
-            message = messageBuilder.buildDeleteMessage(Integer.parseInt(e.getMessage()),"ERROR");
+            message = messageBuilder.buildDeleteMessage(Integer.parseInt(e.getMessage()), "ERROR");
         } else if (e instanceof PersistenceException) {
-            // Gestion des erreurs de suppression
+            // Gestion des erreurs de persistence
             status = HttpStatus.BAD_REQUEST;
-            message = messageBuilder.buildDeleteMessage(Integer.parseInt(e.getMessage()),"ERROR");
+            message = messageBuilder.buildDeleteMessage(Integer.parseInt(e.getMessage()), "ERROR");
         }
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_XML).body(message);
     }

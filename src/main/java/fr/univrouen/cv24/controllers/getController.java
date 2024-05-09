@@ -15,22 +15,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * Contrôleur pour gérer les requêtes GET liées à l'application.
+ */
 @Controller
 public class getController {
 
     @Autowired
     private CVService cvservice;
 
+    /**
+     * Affiche la page d'accueil.
+     *
+     * @return Retourne la page d'accueil au format HTML.
+     */
     @GetMapping("/")
     public String index() {
         return "index";
     }
 
+    /**
+     * Affiche la page d'aide.
+     *
+     * @return Retourne la page d'aide au format HTML.
+     */
     @GetMapping("/help")
     public String help() {
         return "help";
     }
 
+    /**
+     * Récupère les résumés des CV au format HTML.
+     *
+     * @param model Le modèle Spring pour transmettre les données à la vue.
+     * @return Retourne les résumés des CV au format XML ou un message d'erreur au format XML.
+     */
     @GetMapping("/cv24/resume")
     public String resume(Model model) {
         List<CV24> l =  cvservice.getResumeCV();
@@ -38,6 +57,12 @@ public class getController {
         return "resume";
     }
 
+    /**
+     * Récupère les résumés des CV au format XML.
+     *
+     * @return  Retourne  les résumés des CV au format XML ou un message d'erreur au format XML
+     * @throws JAXBException Si une erreur survient lors de la génération du XML.
+     */
     @GetMapping(value ="/cv24/resume/xml", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> cvResumeXML() throws JAXBException {
         XMLMessageBuilder m = new XMLMessageBuilder();
@@ -50,6 +75,13 @@ public class getController {
                 .body(res);
     }
 
+    /**
+     * Récupère un CV complet au format XML par son ID.
+     *
+     * @param cvId L'identifiant du CV.
+     * @return Retourne le CV complet au format XML ou un message d'erreur au format XML.
+     * @throws JAXBException Si une erreur survient lors de la génération du XML.
+     */
     @GetMapping(value ="/cv24/xml", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> getCVCompletXMLByID(@RequestParam("id") int cvId)  throws JAXBException {
         CV24 cv = cvservice.getCVById(cvId);
@@ -61,6 +93,13 @@ public class getController {
                 .body(cvXML);
     }
 
+    /**
+     * Récupère un CV complet au format HTML par son ID.
+     *
+     * @param cvId L'identifiant du CV.
+     * @param model Le modèle Spring pour transmettre les données à la vue.
+     * @return Retourne le CV au format XML ou un message d'erreur au format XML.
+     */
     @GetMapping("/cv24/html")
     public String getCVCompletHTMLByID(@RequestParam("id") int cvId, Model model){
         CV24 cv = cvservice.getCVById(cvId);

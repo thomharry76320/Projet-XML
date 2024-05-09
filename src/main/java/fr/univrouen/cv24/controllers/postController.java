@@ -1,7 +1,7 @@
 package fr.univrouen.cv24.controllers;
 
 import fr.univrouen.cv24.model.CV24;
-import fr.univrouen.cv24.services.*;
+import fr.univrouen.cv24.services.CVService;
 import fr.univrouen.cv24.xml.XMLTransform;
 import jakarta.xml.bind.JAXBException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +14,26 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 
+/**
+ * Contrôleur pour gérer les requêtes POST liées à l'application.
+ */
 @Controller
 public class postController {
 
     @Autowired
     private CVService cvservice;
 
-
+    /**
+     * Méthode POST pour insérer un CV à partir d'un fichier XML.
+     *
+     * @param xmlContent Le contenu XML envoyé dans la requête POST.
+     * @return Une réponse HTTP avec un message XML indiquant le résultat de l'insertion.
+     * @throws JAXBException Si une erreur survient lors de la transformation XML en objet CV24.
+     * @throws IOException   Si une erreur d'entrée/sortie se produit.
+     * @throws SAXException  Si une erreur se produit lors de l'analyse XML.
+     */
     @PostMapping(value = "/insert", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> addIdentite(@RequestBody String xmlContent) throws JAXBException, IOException, SAXException {
+    public ResponseEntity<String> addCV(@RequestBody String xmlContent) throws JAXBException, IOException, SAXException {
         XMLTransform transform = new XMLTransform();
         CV24 cv;
         cv = transform.ConvertXmlToCv(xmlContent);

@@ -8,20 +8,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Cette classe gère les requêtes de suppression de CV.
+ * Elle permet de supprimer un CV en utilisant une requête DELETE HTTP.
+ */
 @Controller
 public class deleteController {
 
     @Autowired
     private CVService cvservice;
 
+    /**
+     * Méthode pour supprimer un CV spécifié par son identifiant.
+     *
+     * @param cvId L'identifiant du CV à supprimer.
+     * @return Retourne un XML contenant un message de confirmation ou un message d'erreur en cas d'échec.
+     */
     @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> deleteCV(@RequestParam("id") int cvId) {
         // Supprimer le CV avec l'ID spécifié
         boolean deleted = cvservice.deleteCV(cvId);
+
+        // Construire la réponse XML
         String xmlResponse = "<message>" +
                 "   <id>" + cvId + "</id>\n" +
                 "   <status>DELETED</status>\n" +
                 "</message>";
+
         // Retourner la réponse avec le code HTTP 200 (OK)
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_XML)
