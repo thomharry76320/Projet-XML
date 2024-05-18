@@ -12,7 +12,7 @@ Avant de lancer l'application, vous devez d'abord configurer votre environnement
 
 3. Exécutez la commande suivante pour configurer le projet et télécharger toutes les dépendances nécessaires :
     ```
-    mvn install
+    mvn clean install
     ```
 ## Exécution du Projet
 
