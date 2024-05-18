@@ -1,6 +1,7 @@
 package fr.univrouen.cv24.controllers;
 
 import fr.univrouen.cv24.services.CVService;
+import fr.univrouen.cv24.xml.XMLMessageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,16 +29,11 @@ public class deleteController {
     public ResponseEntity<String> deleteCV(@RequestParam("id") int cvId) {
         // Supprimer le CV avec l'ID spécifié
         boolean deleted = cvservice.deleteCV(cvId);
-
-        // Construire la réponse XML
-        String xmlResponse = "<message>" +
-                "   <id>" + cvId + "</id>\n" +
-                "   <status>DELETED</status>\n" +
-                "</message>";
+        XMLMessageBuilder message = new XMLMessageBuilder();
 
         // Retourner la réponse avec le code HTTP 200 (OK)
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_XML)
-                .body(xmlResponse);
+                .body(message.buildDeleteMessage(cvId, "DELETED"));
     }
 }

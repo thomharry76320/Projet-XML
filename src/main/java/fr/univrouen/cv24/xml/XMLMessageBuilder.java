@@ -75,7 +75,7 @@ public class XMLMessageBuilder {
         // Crée le résultat de chaque CV
         for (CV24 cv : listcv) {
             CVResume c = new CVResume();
-            c.setDiplome(cv.getCompetences().getDiplome());
+            c.setDiplome(cv.getCompetences().getDiplome().get(0));
             c.setId(cv.getId());
             c.setObjectif(cv.getObjectif().getStatus() + " : " + cv.getObjectif().getObjectif());
             c.setNom(cv.getIdentite().getNom());

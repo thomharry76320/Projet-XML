@@ -2,9 +2,6 @@ package fr.univrouen.cv24.repository;
 
 import fr.univrouen.cv24.model.CV24;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,16 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CVRepository extends JpaRepository<CV24, Long> {
-
-    /**
-     * Cette méthode exécute une requête de suppression personnalisée dans la base de données.
-     *
-     * @param valeur L'identifiant de l'entité CV24 à supprimer.
-     * @return Le nombre d'entités supprimées.
-     */
-    @Modifying
-    @Query("DELETE FROM CV24 e WHERE e.id = :valeur")
-    int deleteByCustomQuery(@Param("valeur") int valeur);
 
     /**
      * Cette méthode récupère une entité CV24 à partir de son identifiant.

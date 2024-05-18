@@ -27,7 +27,7 @@
             <xs:element name="genre" type="genreType" minOccurs="1" maxOccurs="1"></xs:element>
             <xs:element name="nom" type="texteMaj32" minOccurs="1" maxOccurs="1"></xs:element>
             <xs:element name="prenom" type="texte32" minOccurs="1" maxOccurs="1"></xs:element>
-            <xs:element name="tel" type="telType" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="tel" type="telType" minOccurs="1" maxOccurs="1"></xs:element>
             <xs:element name="mail" type="Fmail" minOccurs="0" maxOccurs="1"></xs:element>
         </xs:sequence>
     </xs:complexType>

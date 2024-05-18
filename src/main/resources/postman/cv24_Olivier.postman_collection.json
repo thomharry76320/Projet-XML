@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6a4a21a7-d0df-40b5-8557-9badb6775fbb",
+		"_postman_id": "28cf9868-4086-41f4-8bf4-14c92eb25ee0",
 		"name": "cv24_Olivier",
 		"description": "Collection permettant de tester le service RESTful pour la gestion des CV24EndFragment",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",

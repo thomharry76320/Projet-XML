@@ -6,7 +6,6 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Cette classe représente une entité "CVResume" dans le modèle CV.
@@ -49,7 +48,7 @@ public class CVResume implements Serializable {
      * La liste des diplômes du cv.
      */
     @XmlElement(name = "diplôme", required = true)
-    private List<Diplome> diplome;
+    private Diplome diplome;
 
     /**
      * Récupère le genre du cv.
@@ -124,20 +123,20 @@ public class CVResume implements Serializable {
     }
 
     /**
-     * Récupère la liste des diplômes du cv.
+     * Récupère le diplome le plus important du cv.
      *
-     * @return La liste des diplômes du cv.
+     * @return le diplome le plus important du cv.
      */
-    public List<Diplome> getDiplome() {
+    public Diplome getDiplome() {
         return diplome;
     }
 
     /**
-     * Définit la liste des diplômes du cv.
+     * Définit le diplome le plus important du cv.
      *
-     * @param diplome La liste des diplômes du cv.
+     * @param diplome le diplome le plus important du cv.
      */
-    public void setDiplome(List<Diplome> diplome) {
+    public void setDiplome(Diplome diplome) {
         this.diplome = diplome;
     }
 

@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "identite", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"nom", "prenom"})
+        @UniqueConstraint(columnNames = {"nom", "prenom", "genre" ,"tel"})
 })
 @IdClass(IdentitePK.class)
 @XmlAccessorType(XmlAccessType.FIELD)

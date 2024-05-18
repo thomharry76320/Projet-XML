@@ -2,6 +2,7 @@ package fr.univrouen.cv24.controllers;
 
 import fr.univrouen.cv24.model.CV24;
 import fr.univrouen.cv24.services.CVService;
+import fr.univrouen.cv24.xml.XMLMessageBuilder;
 import fr.univrouen.cv24.xml.XMLTransform;
 import jakarta.xml.bind.JAXBException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,17 +36,14 @@ public class postController {
     @PostMapping(value = "/insert", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> addCV(@RequestBody String xmlContent) throws JAXBException, IOException, SAXException {
         XMLTransform transform = new XMLTransform();
+        XMLMessageBuilder message = new XMLMessageBuilder();
         CV24 cv;
         cv = transform.ConvertXmlToCv(xmlContent);
         cv = cvservice.saveCV(cv);
-        String xmlResponse = "<message>" +
-                "   <id>" + cv.getId() + "</id>\n" +
-                "   <status>INSERTED</status>\n" +
-                "</message>";
 
         // Retourner la réponse avec le code HTTP 200 (OK)
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_XML)
-                .body(xmlResponse);
+                .body(message.buildInsertMessage(cv.getId(), "INSERTED"));
     }
 }

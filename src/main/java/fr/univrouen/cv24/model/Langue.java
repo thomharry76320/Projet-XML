@@ -41,7 +41,7 @@ public class Langue {
     /** Niveau de maîtrise à l'écrit (optionnel). */
     @Column(name = "nivi")
     @XmlAttribute(name = "nivi")
-    private Integer nivi;
+    private int nivi;
 
     /**
      * Obtient le nom de la langue.

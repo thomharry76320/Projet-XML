@@ -11,6 +11,9 @@ public class IdentitePK implements Serializable {
 
     private String nom; // Le nom de la personne
     private String prenom; // Le prénom de la personne
+    private String tel;
+
+    private String genre;
 
     /**
      * Constructeur par défaut de la classe IdentitePK.
@@ -52,4 +55,41 @@ public class IdentitePK implements Serializable {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+    /**
+     * Définit le genre de la personne.
+     *
+     * @param genre Le genre de la personne.
+     */
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    /**
+     * Obtient le genre de la personne.
+     *
+     * @return Le genre de la personne.
+     */
+    public String getGenre() {
+        return genre;
+    }
+
+    /**
+     * Obtient le numeros de telephone  de la personne.
+     *
+     * @return Le numeros de telephone  de la personne.
+     */
+    public String getTel() {
+        return tel;
+    }
+
+    /**
+     * Définit le prénom de la personne.
+     *
+     * @param tel Le numeros de telephone de la personne.
+     */
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
 }
